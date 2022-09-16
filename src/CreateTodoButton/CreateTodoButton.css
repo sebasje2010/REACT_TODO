@@ -22,5 +22,5 @@
 }
 
 .CreateTodoButton:hover {
-  transform: rotate(270deg);
+  transform: rotate(90deg);
 }

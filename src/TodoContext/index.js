@@ -19,7 +19,8 @@ function TodoProvider(props){
 
   if (!searchValue.length>=1){
     searchedTodos=todos;
-  } else{ 
+  } 
+  else{ 
     searchedTodos=todos.filter(todo=>{
       const todoText=todo.text.toLowerCase()
       const searchText=searchValue.toLowerCase()
@@ -27,50 +28,50 @@ function TodoProvider(props){
     })
   }
 
-const addTodo=(text)=>{
-  const newTodos=[...todos]
-  newTodos.push({
-    completed:false,
-    text,
-  })
-  saveTodos(newTodos)
-}
-const completeTodo=(text)=>{
-  const todoIndex=todos.findIndex(todo=>todo.text===text);
-  const newTodos=[...todos]
-  if (newTodos[todoIndex].completed==false){
-    newTodos[todoIndex].completed=true
-  } else{
-    newTodos[todoIndex].completed=false
+  const addTodo=(text)=>{
+    const newTodos=[...todos]
+    newTodos.push({
+      completed:false,
+      text,
+    })
+    saveTodos(newTodos)
   }
-  saveTodos(newTodos)
-}
-
-const deleteTodo=(text)=>{
-  const todoIndex=todos.findIndex(todo=>todo.text===text);
-  const newTodos=[...todos]
-  newTodos.splice(todoIndex,1)
-  saveTodos(newTodos)
-}
-
-    return(
-        <TodoContext.Provider value={{
-          error,
-          loading,
-          totalTodos,
-          completedTodos,
-          searchValue,
-          setSearchValue,
-          searchedTodos,
-          completeTodo,
-          deleteTodo,
-          openModal,
-          setOpenModal,
-          addTodo
-        }}>
-            {props.children}
-        </TodoContext.Provider>
-        )
+  const completeTodo=(text)=>{
+    const todoIndex=todos.findIndex(todo=>todo.text===text);
+    const newTodos=[...todos]
+    if (newTodos[todoIndex].completed===false){
+      newTodos[todoIndex].completed=true
+    } else{
+      newTodos[todoIndex].completed=false
     }
+    saveTodos(newTodos)
+  }
+
+  const deleteTodo=(text)=>{
+    const todoIndex=todos.findIndex(todo=>todo.text===text);
+    const newTodos=[...todos]
+    newTodos.splice(todoIndex,1)
+    saveTodos(newTodos)
+  }
+
+  return(
+    <TodoContext.Provider value={{
+      error,
+      loading,
+      totalTodos,
+      completedTodos,
+      searchValue,
+      setSearchValue,
+      searchedTodos,
+      completeTodo,
+      deleteTodo,
+      openModal,
+      setOpenModal,
+      addTodo
+    }}>
+    {props.children}
+    </TodoContext.Provider>
+  )
+}
     
 export {TodoContext,TodoProvider}
